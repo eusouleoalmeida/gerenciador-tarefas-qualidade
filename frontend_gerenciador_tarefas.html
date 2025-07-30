@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Gerenciador de Tarefas</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 2rem;
+    }
+    .container {
+      max-width: 600px;
+      background: #fff;
+      padding: 2rem;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border-radius: 8px;
+    }
+    h1 {
+      text-align: center;
+      color: #0070c0;
+    }
+    input {
+      width: calc(100% - 110px);
+      padding: 10px;
+      font-size: 1rem;
+    }
+    button {
+      padding: 10px;
+      font-size: 1rem;
+      background: #0070c0;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      margin-left: 8px;
+      border-radius: 4px;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 1rem;
+    }
+    li {
+      background: #e0f0ff;
+      padding: 10px;
+      margin-bottom: 0.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: 4px;
+    }
+    .btn-delete {
+      background: #d9534f;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Gerenciador de Tarefas</h1>
+    <div>
+      <input type="text" id="taskInput" placeholder="Digite uma tarefa" />
+      <button onclick="addTask()">Adicionar</button>
+      <button onclick="fetchTasks()">Atualizar</button>
+    </div>
+    <ul id="taskList"></ul>
+  </div>
+
+  <script>
+    const API = 'http://localhost:5000/api/tasks';
+
+    async function fetchTasks() {
+      const res = await fetch(API);
+      const tasks = await res.json();
+      const list = document.getElementById('taskList');
+      list.innerHTML = '';
+      tasks.forEach(task => {
+        const li = document.createElement('li');
+        li.textContent = task.text;
+        const del = document.createElement('button');
+        del.textContent = 'Excluir';
+        del.classList.add('btn-delete');
+        del.onclick = () => deleteTask(task.id);
+        li.appendChild(del);
+        list.appendChild(li);
+      });
+    }
+
+    async function addTask() {
+      const input = document.getElementById('taskInput');
+      const text = input.value.trim();
+      if (!text) return alert('Digite uma tarefa válida');
+      await fetch(API, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text })
+      });
+      input.value = '';
+      fetchTasks();
+    }
+
+    async function deleteTask(id) {
+      await fetch(`${API}/${id}`, { method: 'DELETE' });
+      fetchTasks();
+    }
+
+    fetchTasks();
+  </script>
+</body>
+</html>
