@@ -1,7 +1,7 @@
 describe('API de Tarefas - Testes Negativos com Cypress', () => {
   const API = 'http://localhost:5000/api/tasks';
 
-  it('Não deve permitir criar tarefa sem texto', () => {
+  it('Não permite criar tarefa sem texto', () => {
     cy.request({
       method: 'POST',
       url: API,
@@ -12,7 +12,7 @@ describe('API de Tarefas - Testes Negativos com Cypress', () => {
     });
   });
 
-  it('Deve retornar 404 ao tentar deletar tarefa inexistente', () => {
+  it('Retorna 404 ao tentar deletar tarefa inexistente', () => {
     cy.request({
       method: 'DELETE',
       url: `${API}/999999`,
@@ -22,7 +22,7 @@ describe('API de Tarefas - Testes Negativos com Cypress', () => {
     });
   });
 
-  it('Não deve aceitar texto muito longo', () => {
+  it('Não aceita texto muito longo', () => {
     const longText = 'A'.repeat(1000);
     cy.request({
       method: 'POST',

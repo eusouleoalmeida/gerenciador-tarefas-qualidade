@@ -2,7 +2,7 @@ describe('API de Tarefas - Testes Positivos com Cypress', () => {
   const API = 'http://localhost:5000/api/tasks';
 
   it('Cria uma nova tarefa', () => {
-    const novaTarefa = 'Tareta teste Cypress';
+    const novaTarefa = 'Tarefa Teste Cypress';
 
     cy.request('POST', API, { text: novaTarefa }).then((response) => {
       console.log('✅ Tarefa criada:', response.body);
