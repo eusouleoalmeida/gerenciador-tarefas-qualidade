@@ -1,16 +1,24 @@
-# 📦 Gerenciador de Tarefas – Backend + Testes Cypress
+# 📦 Gerenciador de Tarefas (Qualidade de Software)
 
-Projeto simples para demonstração de uma API RESTful usando Node.js, Express e PostgreSQL, com testes E2E automatizados usando Cypress.
+Sistema simples de gerenciamento de tarefas com foco em demonstração de uma API RESTful usando Node.js, Express e PostgreSQL, com testes E2E automatizados usando Cypress e boas práticas de QA.
 
 ---
 
-## 🚀 Tecnologias Utilizadas
+## 🧩 Tecnologias utilizadas
 
-- Node.js + Express
-- PostgreSQL
-- Cypress (para testes automatizados)
-- Docker (opcional)
-- GitHub
+### Back-end
+- **Node.js + Express**
+- **PostgreSQL** (via `pg`)
+- **.env** para variáveis sensíveis
+
+### Front-end
+- Interface leve em **HTML + Fetch API**
+- Visualização simples para testes
+
+### Testes Automatizados
+- **Cypress** (Testes E2E)
+- Testes **positivos** e **negativos**
+- Execução via `npx cypress run` ou interface visual
 
 ---
 
@@ -24,22 +32,31 @@ Projeto simples para demonstração de uma API RESTful usando Node.js, Express e
 
 ---
 
-## 🛠️ Pré-requisitos
+## 🚀 Como rodar o projeto
 
-- Node.js v18+ (com `npm`)
-- PostgreSQL instalado localmente
-- Git
+### Pré-requisitos:
+- Node.js v18+ e NPM
+- PostgreSQL instalado e rodando
+- Conta no GitHub (caso deseje versionar)
+- Cypress (`npx cypress open` instala automaticamente)
 
----
+### 1. Clone o repositório:
 
-## 🐘 Configurando o PostgreSQL
+```bash
+git clone https://github.com/seu-usuario/gerenciador-tarefas-qualidade.git
+cd gerenciador-tarefas-qualidade
+```
 
-1. Crie o banco:
+### 2. Configure o banco de dados:
+
+Crie o banco no PostgreSQL com:
+
 ```sql
 CREATE DATABASE tarefas;
 ```
 
-2. Crie a tabela:
+Crie a tabela:
+
 ```sql
 CREATE TABLE tasks (
   id SERIAL PRIMARY KEY,
@@ -47,27 +64,33 @@ CREATE TABLE tasks (
 );
 ```
 
-3. Crie o arquivo `.env` na raiz do backend:
+### 3. Configure as variáveis de ambiente:
 
-```
-DATABASE_URL=postgres://seu_usuario:sua_senha@localhost:5432/tarefas
+Crie o arquivo `.env` na pasta `backend_pg_tasks/`:
+
+```env
+DATABASE_URL=postgres://usuario:senha@localhost:5432/tarefas
 ```
 
 ---
 
-## ▶️ Executando o Backend
+## 🔧 Executando o projeto
 
+### Back-end (API):
 ```bash
 cd backend_pg_tasks
 npm install
 npm start
 ```
 
-Servidor será iniciado em `http://localhost:5000`
+### Interface HTML (opcional):
+Abra `frontend_gerenciador_tarefas.html` no navegador.
 
 ---
 
-## ✅ Rodando os Testes com Cypress
+## 🧪 Executando os testes automatizados
+
+### Testes positivos e negativos com Cypress:
 
 ```bash
 cd cypress_tasks_test
@@ -75,7 +98,13 @@ npm install
 npx cypress open
 ```
 
-Abra o teste `tasks.spec.js` e veja os testes sendo executados.
+Ou para execução em modo headless:
+
+```bash
+npx cypress run
+```
+
+Abra o teste `tasks.cy.js` e `tasks_error.cy.js` e veja os testes sendo executados.
 
 ---
 
@@ -87,26 +116,44 @@ Abra o teste `tasks.spec.js` e veja os testes sendo executados.
 
 ---
 
-## 📁 Estrutura dos diretórios
+## 📁 Estrutura do projeto
 
 ```
-backend_pg_tasks/
-├── controllers/
-├── models/
-├── routes/
-├── db/
-└── server.js
-
-cypress_tasks_test/
-├── cypress/
-│   ├── integration/
-│   └── support/
-├── cypress.json
-└── package.json
+📦 projeto
+ ┣ 📂 backend_pg_tasks
+ ┃ ┣ 📜 controllers/
+ ┃ ┣ 📜 models/
+ ┃ ┣ 📜 routes/
+ ┃ ┣ 📜 db/
+ ┃ ┣ 📜 server.js
+ ┃ ┗ 📜 .env
+ ┣ 📂 cypress_tasks_test
+ ┃ ┣ 📂 cypress
+ ┃ ┃ ┣ 📂 e2e
+ ┃ ┃ ┃ ┣ 📜 tasks.cy.js
+ ┃ ┃ ┃ ┗ 📜 tasks_error.cy.js
+ ┃ ┃ ┣ 📂 integration
+ ┃ ┣ 📜 cypress.json
+ ┃ ┣ 📜 package.json
+ ┗ 📜 frontend_gerenciador_tarefas.html
 ```
 
 ---
 
-## 👨‍💻 Autor
+## 🎯 Objetivo do projeto
 
-Leanderson Silva de Almeida – Analista de Qualidade de Software – 2025
+Este projeto foi desenvolvido como parte de um processo seletivo para a vaga de **Analista de Qualidade de Software Júnior**.
+
+Demonstra:
+- Boas práticas de testes automatizados
+- Cobertura de cenários positivos e negativos
+- Organização e clareza no código
+- Estrutura de projeto real com API + testes
+
+---
+
+## 👨‍💻 Desenvolvedor
+
+**Leanderson Silva de Almeida**  
+📧 leanderson@lumgra.com.br  
+🔗 [linkedin.com/in/eusouleoalmeida](https://linkedin.com/in/eusouleoalmeida)
